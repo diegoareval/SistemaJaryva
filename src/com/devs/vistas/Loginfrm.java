@@ -6,6 +6,7 @@
 package com.devs.vistas;
 
 import com.devs.auxiliar.SesionUsuarios;
+import com.devs.auxiliar.UserData;
 import dao.UsuarioDao;
 import ds.desktop.notify.DesktopNotify;
 import entities.Usuarios;
@@ -88,8 +89,7 @@ private void VerificarUser(){
                 
                 // pasar el usuario
               obj.setUsuario(usuario);
-              SesionUsuarios sesio=new SesionUsuarios();
-              sesio.setUsuarios(usuario);
+             UserData data=new UserData(usuario.getNombre(), usuario.getCodigo());
                 obj.setVisible(true);
                 DesktopNotify.showDesktopMessage("Bienvenido", "Ha Iniciado Sesion con Exito "+usuario.getNombre(), DesktopNotify.SUCCESS);
                // sesion.setUsuarios(usuario);

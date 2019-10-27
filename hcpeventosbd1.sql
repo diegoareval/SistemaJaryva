@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-10-2019 a las 16:17:50
+-- Tiempo de generación: 27-10-2019 a las 22:10:48
 -- Versión del servidor: 10.1.37-MariaDB
 -- Versión de PHP: 7.3.0
 
@@ -457,7 +457,8 @@ CREATE TABLE `programaciones` (
   `pax` varchar(50) NOT NULL,
   `entrada` time NOT NULL,
   `capitan` varchar(50) NOT NULL,
-  `idsalon` int(11) NOT NULL
+  `idsalon` int(11) NOT NULL,
+  `idmovimientoprogramaciones` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -674,7 +675,8 @@ ALTER TABLE `programaciones`
   ADD PRIMARY KEY (`idprogramaciones`),
   ADD KEY `prog_idsalon` (`idsalon`),
   ADD KEY `prog_progr` (`idprogramacion`),
-  ADD KEY `prog_planillas` (`idplanilla`);
+  ADD KEY `prog_planillas` (`idplanilla`),
+  ADD KEY `fk_prog_movimientos` (`idmovimientoprogramaciones`);
 
 --
 -- Indices de la tabla `salones`
@@ -918,6 +920,7 @@ ALTER TABLE `obligaciones_contrato`
 -- Filtros para la tabla `programaciones`
 --
 ALTER TABLE `programaciones`
+  ADD CONSTRAINT `fk_prog_movimientos` FOREIGN KEY (`idmovimientoprogramaciones`) REFERENCES `movimientoprogramacion` (`id`),
   ADD CONSTRAINT `prog_idsalon` FOREIGN KEY (`idsalon`) REFERENCES `salones` (`idsalon`),
   ADD CONSTRAINT `prog_planillas` FOREIGN KEY (`idplanilla`) REFERENCES `planillas` (`codigoplanilla`),
   ADD CONSTRAINT `prog_progr` FOREIGN KEY (`idprogramacion`) REFERENCES `programacion` (`cod_programacion`);
