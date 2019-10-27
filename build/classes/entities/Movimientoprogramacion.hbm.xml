@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10-24-2019 05:29:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entities.Movimientoprogramacion" table="movimientoprogramacion" catalog="hcpeventosbd1" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="planillas" class="entities.Planillas" fetch="select" lazy="false">
+            <column name="idplanilla" length="10" not-null="true" />
+        </many-to-one>
+        <set name="programacioneses" table="programaciones" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="idmovimientoprogramaciones" not-null="true" />
+            </key>
+            <one-to-many class="entities.Programaciones" />
+        </set>
+        <set name="detalleMovimientoProgramacions" table="detalle_movimiento_programacion" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="idmovimiento" not-null="true" />
+            </key>
+            <one-to-many class="entities.DetalleMovimientoProgramacion" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10-24-2019 05:29:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entities.Cargos" table="cargos" catalog="hcpeventosbd1" optimistic-lock="version">
+        <id name="codCargo" type="java.lang.Integer">
+            <column name="cod_cargo" />
+            <generator class="identity" />
+        </id>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="60" />
+        </property>
+        <set name="detalleMovimientoProgramacions" table="detalle_movimiento_programacion" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="idactividad" not-null="true" />
+            </key>
+            <one-to-many class="entities.DetalleMovimientoProgramacion" />
+        </set>
+        <set name="catPersonals" table="cat_personal" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="cod_cargo" />
+            </key>
+            <one-to-many class="entities.CatPersonal" />
+        </set>
+    </class>
+</hibernate-mapping>

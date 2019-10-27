@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10-24-2019 05:29:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entities.CatPersonal" table="cat_personal" catalog="hcpeventosbd1" optimistic-lock="version">
+        <id name="codPersonal" type="java.lang.Integer">
+            <column name="cod_personal" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="afp" class="entities.Afp" fetch="select" lazy="false">
+            <column name="cod_afp" />
+        </many-to-one>
+        <many-to-one name="bancos" class="entities.Bancos" fetch="select" lazy="false">
+            <column name="cod_banco" />
+        </many-to-one>
+        <many-to-one name="cargos" class="entities.Cargos" fetch="select" lazy="false">
+            <column name="cod_cargo" />
+        </many-to-one>
+        <many-to-one name="departamentos" class="entities.Departamentos" fetch="select" lazy="false">
+            <column name="cod_departamento" />
+        </many-to-one>
+        <many-to-one name="programacion" class="entities.Programacion" fetch="select" lazy="false">
+            <column name="cod_programacion" />
+        </many-to-one>
+        <property name="codJaryva" type="string">
+            <column name="cod_jaryva" length="10" />
+        </property>
+        <property name="nombres" type="string">
+            <column name="nombres" length="70" />
+        </property>
+        <property name="apellidos" type="string">
+            <column name="apellidos" length="70" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="100" />
+        </property>
+        <property name="genero" type="string">
+            <column name="genero" length="45" />
+        </property>
+        <property name="estadoCivil" type="string">
+            <column name="estado_civil" length="45" />
+        </property>
+        <property name="telefono1" type="string">
+            <column name="telefono1" length="8" />
+        </property>
+        <property name="telefono2" type="string">
+            <column name="telefono2" length="8" />
+        </property>
+        <property name="fechaIngreso" type="date">
+            <column name="fecha_ingreso" length="10" />
+        </property>
+        <property name="fechaNacimiento" type="date">
+            <column name="fecha_nacimiento" length="10" />
+        </property>
+        <property name="dui" type="string">
+            <column name="dui" length="10" />
+        </property>
+        <property name="nit" type="string">
+            <column name="nit" length="17" />
+        </property>
+        <property name="isss" type="string">
+            <column name="isss" length="9" />
+        </property>
+        <property name="nup" type="string">
+            <column name="nup" length="12" />
+        </property>
+        <property name="ctaBancaria" type="string">
+            <column name="cta_bancaria" length="15" />
+        </property>
+        <property name="catPago" type="string">
+            <column name="cat_pago" length="5" />
+        </property>
+        <property name="obserbaciones" type="string">
+            <column name="obserbaciones" length="150" />
+        </property>
+        <set name="contratoTrabajos" table="contrato_trabajo" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="cod_personal" not-null="true" />
+            </key>
+            <one-to-many class="entities.ContratoTrabajo" />
+        </set>
+        <set name="detalleHojapagos" table="detalle_hojapago" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="idempleado" not-null="true" />
+            </key>
+            <one-to-many class="entities.DetalleHojapago" />
+        </set>
+        <set name="detalleMovimientoProgramacions" table="detalle_movimiento_programacion" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="idpersonal" not-null="true" />
+            </key>
+            <one-to-many class="entities.DetalleMovimientoProgramacion" />
+        </set>
+        <set name="empDetalleactividadds" table="emp_detalleactividadd" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="idpersonal" not-null="true" />
+            </key>
+            <one-to-many class="entities.EmpDetalleactividadd" />
+        </set>
+    </class>
+</hibernate-mapping>

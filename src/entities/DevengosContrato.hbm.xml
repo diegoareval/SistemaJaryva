@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10-24-2019 05:29:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entities.DevengosContrato" table="devengos_contrato" catalog="hcpeventosbd1" optimistic-lock="version">
+        <id name="iddevengo" type="java.lang.Integer">
+            <column name="iddevengo" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="contratoTrabajo" class="entities.ContratoTrabajo" fetch="select" lazy="false">
+            <column name="idcontrato" not-null="true" />
+        </many-to-one>
+        <property name="devengospactados" type="string">
+            <column name="devengospactados" length="100" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

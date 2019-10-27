@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10-24-2019 05:29:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entities.Planillas" table="planillas" catalog="hcpeventosbd1" optimistic-lock="version">
+        <id name="codigoplanilla" type="string">
+            <column name="codigoplanilla" length="10" />
+            <generator class="assigned" />
+        </id>
+        <property name="desde" type="date">
+            <column name="desde" length="10" not-null="true" />
+        </property>
+        <property name="hasta" type="date">
+            <column name="hasta" length="10" not-null="true" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="20" not-null="true" />
+        </property>
+        <set name="movimientoprogramacions" table="movimientoprogramacion" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="idplanilla" length="10" not-null="true" />
+            </key>
+            <one-to-many class="entities.Movimientoprogramacion" />
+        </set>
+        <set name="programacioneses" table="programaciones" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="idplanilla" length="10" not-null="true" />
+            </key>
+            <one-to-many class="entities.Programaciones" />
+        </set>
+    </class>
+</hibernate-mapping>

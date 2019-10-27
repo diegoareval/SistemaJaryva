@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10-24-2019 05:29:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entities.DetalleHojapago" table="detalle_hojapago" catalog="hcpeventosbd1" optimistic-lock="version">
+        <id name="iddetalleHoja" type="java.lang.Integer">
+            <column name="iddetalle_hoja" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="catPersonal" class="entities.CatPersonal" fetch="select" lazy="false">
+            <column name="idempleado" not-null="true" />
+        </many-to-one>
+        <many-to-one name="hojapago" class="entities.Hojapago" fetch="select" lazy="false">
+            <column name="idhojapago" not-null="true" />
+        </many-to-one>
+        <property name="prg" type="string">
+            <column name="prg" length="10" not-null="true" />
+        </property>
+        <property name="trabajo" type="string">
+            <column name="trabajo" length="10" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="10" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

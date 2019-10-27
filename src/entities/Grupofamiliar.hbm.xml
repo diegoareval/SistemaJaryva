@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10-24-2019 05:29:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entities.Grupofamiliar" table="grupofamiliar" catalog="hcpeventosbd1" optimistic-lock="version">
+        <id name="idgrupo" type="java.lang.Integer">
+            <column name="idgrupo" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="contratoTrabajo" class="entities.ContratoTrabajo" fetch="select" lazy="false">
+            <column name="cod_contrato" not-null="true" />
+        </many-to-one>
+        <property name="grupofamiliar" type="string">
+            <column name="grupofamiliar" length="70" not-null="true" />
+        </property>
+        <property name="parentezco" type="string">
+            <column name="parentezco" length="50" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

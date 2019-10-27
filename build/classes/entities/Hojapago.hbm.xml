@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10-24-2019 05:29:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entities.Hojapago" table="hojapago" catalog="hcpeventosbd1" optimistic-lock="version">
+        <id name="idhoja" type="java.lang.Integer">
+            <column name="idhoja" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="programaciones" class="entities.Programaciones" fetch="select" lazy="false">
+            <column name="idprogramacion" not-null="true" />
+        </many-to-one>
+        <set name="detalleHojapagos" table="detalle_hojapago" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="idhojapago" not-null="true" />
+            </key>
+            <one-to-many class="entities.DetalleHojapago" />
+        </set>
+    </class>
+</hibernate-mapping>

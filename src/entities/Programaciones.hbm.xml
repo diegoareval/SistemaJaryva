@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10-24-2019 05:29:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entities.Programaciones" table="programaciones" catalog="hcpeventosbd1" optimistic-lock="version">
+        <id name="idprogramaciones" type="java.lang.Integer">
+            <column name="idprogramaciones" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="movimientoprogramacion" class="entities.Movimientoprogramacion" fetch="select" lazy="false">
+            <column name="idmovimientoprogramaciones" not-null="true" />
+        </many-to-one>
+        <many-to-one name="planillas" class="entities.Planillas" fetch="select" lazy="false">
+            <column name="idplanilla" length="10" not-null="true" />
+        </many-to-one>
+        <many-to-one name="programacion" class="entities.Programacion" fetch="select" lazy="false">
+            <column name="idprogramacion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="salones" class="entities.Salones" fetch="select" lazy="false">
+            <column name="idsalon" not-null="true" />
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="10" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="100" not-null="true" />
+        </property>
+        <property name="pax" type="string">
+            <column name="pax" length="50" not-null="true" />
+        </property>
+        <property name="entrada" type="time">
+            <column name="entrada" length="8" not-null="true" />
+        </property>
+        <property name="capitan" type="string">
+            <column name="capitan" length="50" not-null="true" />
+        </property>
+        <set name="hojapagos" table="hojapago" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="idprogramacion" not-null="true" />
+            </key>
+            <one-to-many class="entities.Hojapago" />
+        </set>
+        <set name="detalleActProgramacioneses" table="detalle_act_programaciones" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="idprogramaciones" not-null="true" />
+            </key>
+            <one-to-many class="entities.DetalleActProgramaciones" />
+        </set>
+    </class>
+</hibernate-mapping>

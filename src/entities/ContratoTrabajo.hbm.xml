@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10-24-2019 05:29:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entities.ContratoTrabajo" table="contrato_trabajo" catalog="hcpeventosbd1" optimistic-lock="version">
+        <id name="idcontrato" type="java.lang.Integer">
+            <column name="idcontrato" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="catPersonal" class="entities.CatPersonal" fetch="select" lazy="false">
+            <column name="cod_personal" not-null="true" />
+        </many-to-one>
+        <property name="fechacontrato" type="date">
+            <column name="fechacontrato" length="10" not-null="true" />
+        </property>
+        <property name="finalizacioncontrato" type="date">
+            <column name="finalizacioncontrato" length="10" not-null="true" />
+        </property>
+        <property name="enfecha" type="date">
+            <column name="enfecha" length="10" not-null="true" />
+        </property>
+        <property name="extendido" type="string">
+            <column name="extendido" length="80" not-null="true" />
+        </property>
+        <property name="nacionalidad" type="string">
+            <column name="nacionalidad" length="30" not-null="true" />
+        </property>
+        <property name="profesion" type="string">
+            <column name="profesion" length="30" not-null="true" />
+        </property>
+        <property name="lugartrabajo" type="string">
+            <column name="lugartrabajo" length="70" not-null="true" />
+        </property>
+        <set name="grupofamiliars" table="grupofamiliar" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="cod_contrato" not-null="true" />
+            </key>
+            <one-to-many class="entities.Grupofamiliar" />
+        </set>
+        <set name="obligacionesContratos" table="obligaciones_contrato" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="idcontrato" not-null="true" />
+            </key>
+            <one-to-many class="entities.ObligacionesContrato" />
+        </set>
+        <set name="devengosContratos" table="devengos_contrato" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="idcontrato" not-null="true" />
+            </key>
+            <one-to-many class="entities.DevengosContrato" />
+        </set>
+    </class>
+</hibernate-mapping>

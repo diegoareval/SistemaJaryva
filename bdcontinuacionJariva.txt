@@ -1,0 +1,57 @@
+#######################programaciones###########################
+
+programaciones(table)      actividad_programaciones(table)
+id_prog(pk)                     idactividad_programaciones(pk)                       
+idprogramacion(fk)              idactividad o idevento
+idplanilla(fk)
+fecha                        prog_eventos(table)#replantear
+descripcion                  id_prog_eventos(pk)
+idsalon(fk)                  abrv
+pax                          descripcion
+entrada                      id_prog(fk)
+capitan
+
+
+emp_programaciones
+id_emp_programaciones(pk)
+guia
+id_empleado(fk catpersonal)
+id_prog(fk)
+pago
+ok?
+
+
+###############fin############################################
+
+#######################hoja pago###########################
+pago(table)                            detalle_hpago(pago)
+idpago(pk)                             id_detalle_hpago(pk)                                        
+idplanilla(fk)                           idpago(fk)*analizar o id_prog(fk)
+idprogramacion o "evento"(fk)
+descripcion                             detalle_emp(table)
+salon                                   iddetalleemp(pk)
+pax                                     id_emp_programaciones(fk) o idmovimiento(fk)
+capitan                                 prg
+entrada                                  trabajo
+fecha
+programados
+adicionados
+noasistieron
+efectivos
+
+eventos segun planilla
+mostrar
+fecha - evento - tipo evento - salon -capitan- pax
+
+###############fin############################################
+movimiento empleados*
+idmovimiento(pk)
+idplanilla(fk)
+idempleado(pk)
+guia
+fecha
+idactividad(fk)
+horas
+precio
+valor
+ok?
