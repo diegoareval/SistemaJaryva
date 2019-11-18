@@ -317,7 +317,7 @@
             <StringItem index="1" value="Casado(a)"/>
             <StringItem index="2" value="viudo(a)"/>
             <StringItem index="3" value="Divorciado(a)"/>
-            <StringItem index="4" value="Acompanado(a)"/>
+            <StringItem index="4" value="Acompa&#xf1;ado(a)"/>
           </StringArray>
         </Property>
       </Properties>

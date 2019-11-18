@@ -20,7 +20,7 @@ public class Programaciones  implements java.io.Serializable {
      private Date fecha;
      private String descripcion;
      private String pax;
-     private Date entrada;
+     private String entrada;
      private String capitan;
      private Set hojapagos = new HashSet(0);
      private Set detalleActProgramacioneses = new HashSet(0);
@@ -29,7 +29,7 @@ public class Programaciones  implements java.io.Serializable {
     }
 
 	
-    public Programaciones(Movimientoprogramacion movimientoprogramacion, Planillas planillas, Programacion programacion, Salones salones, Date fecha, String descripcion, String pax, Date entrada, String capitan) {
+    public Programaciones(Movimientoprogramacion movimientoprogramacion, Planillas planillas, Programacion programacion, Salones salones, Date fecha, String descripcion, String pax, String entrada, String capitan) {
         this.movimientoprogramacion = movimientoprogramacion;
         this.planillas = planillas;
         this.programacion = programacion;
@@ -40,7 +40,7 @@ public class Programaciones  implements java.io.Serializable {
         this.entrada = entrada;
         this.capitan = capitan;
     }
-    public Programaciones(Movimientoprogramacion movimientoprogramacion, Planillas planillas, Programacion programacion, Salones salones, Date fecha, String descripcion, String pax, Date entrada, String capitan, Set hojapagos, Set detalleActProgramacioneses) {
+    public Programaciones(Movimientoprogramacion movimientoprogramacion, Planillas planillas, Programacion programacion, Salones salones, Date fecha, String descripcion, String pax, String entrada, String capitan, Set hojapagos, Set detalleActProgramacioneses) {
        this.movimientoprogramacion = movimientoprogramacion;
        this.planillas = planillas;
        this.programacion = programacion;
@@ -110,11 +110,11 @@ public class Programaciones  implements java.io.Serializable {
     public void setPax(String pax) {
         this.pax = pax;
     }
-    public Date getEntrada() {
+    public String getEntrada() {
         return this.entrada;
     }
     
-    public void setEntrada(Date entrada) {
+    public void setEntrada(String entrada) {
         this.entrada = entrada;
     }
     public String getCapitan() {

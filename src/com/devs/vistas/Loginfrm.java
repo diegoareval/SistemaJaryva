@@ -89,7 +89,9 @@ private void VerificarUser(){
                 
                 // pasar el usuario
               obj.setUsuario(usuario);
-             UserData data=new UserData(usuario.getNombre(), usuario.getCodigo());
+             UserData data=new UserData();
+             data.setUsername(usuario);
+             
                 obj.setVisible(true);
                 DesktopNotify.showDesktopMessage("Bienvenido", "Ha Iniciado Sesion con Exito "+usuario.getNombre(), DesktopNotify.SUCCESS);
                // sesion.setUsuarios(usuario);

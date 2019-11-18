@@ -4,8 +4,10 @@ package com.devs.vistas;
 
 import com.devs.auxiliar.Conexion;
 import dao.AfpDao;
+import dao.UsuarioDao;
 import ds.desktop.notify.DesktopNotify;
 import entities.Afp;
+import entities.Usuarios;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -29,8 +31,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.FillPatternType;
@@ -45,6 +45,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author DiegoArevalo
  */
 public class frmAfp extends javax.swing.JFrame {
+    String idusu;
+    Usuarios usuarios;
     AfpDao afpDao=new AfpDao();
 Afp afpselect=null;
    
@@ -61,6 +63,7 @@ DefaultTableModel modeloTabla = new DefaultTableModel() {
         initComponents();
         this.setResizable(false);
         popup();
+      
         DesControlesInicio();
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(1);
@@ -70,8 +73,11 @@ DefaultTableModel modeloTabla = new DefaultTableModel() {
         btnEliminar.setEnabled(false);
         btnmodificar.setEnabled(false);
         txtid.setEditable(false);
+        
+    
     }
     private void limpiarTabla() {
+       
         int numFila = modeloTabla.getRowCount(); // cantidad de filas de la tabla
         if (numFila > 0) {
             // debe de ser i mayor o igual a cero
@@ -80,6 +86,30 @@ DefaultTableModel modeloTabla = new DefaultTableModel() {
             }
         }
     }
+  
+//     public void setUsuario(String id) {
+//       idusu=id;
+//         UsuarioDao userDao=new UsuarioDao();
+//        List<Usuarios>listaUsuarios = userDao.findbyId(id);
+//        if(listaUsuarios.size()>0){
+//            for (Usuarios u : listaUsuarios) {
+//                u=usuarios;    
+//            }
+//        }
+//    }
+    public void UserFilter(String id){
+          UsuarioDao userDao=new UsuarioDao();
+        List<Usuarios>listaUsuarios = userDao.findbyId(idusu);
+        if(listaUsuarios.size()>0){
+            for (Usuarios u : listaUsuarios) {
+                usuarios=u;   
+            }
+        }
+        if(usuarios.getNombre().equalsIgnoreCase("Consultas")){
+            btnguardar.setVisible(false);
+        }
+     }
+     
     private void cargarColumnas() {
         modeloTabla.addColumn("Codigo");
         modeloTabla.addColumn("Descripcion");
@@ -199,6 +229,7 @@ public void limpiartextbox(){
          btnguardar.setEnabled(true);
      }
 public void guardar(){
+    
     Afp afp=new Afp();
         try {
             if(txtdescripcion.getText().length()==0){
@@ -491,7 +522,6 @@ public void imprimireporte(){
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnnuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtminimo, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -501,7 +531,8 @@ public void imprimireporte(){
                         .addComponent(btnmodificar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(8, 8, 8)
-                        .addComponent(btnimprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnimprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)

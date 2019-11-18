@@ -26,6 +26,24 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+
 public class pnlAndroid extends javax.swing.JPanel {
 //metodo que permite determinar si se hara modificacion o no
 TextFieldEvent evento=new TextFieldEvent();
@@ -90,6 +108,55 @@ TextFieldEvent evento=new TextFieldEvent();
 
         }
     }
+    
+    //generar excel
+//    private void generarExcel() {
+//        HSSFWorkbook workbook = new ExcelUtils.ExcelGenerator().generateExcel();
+//        JFileChooser fileChooser = new JFileChooser();
+//        FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos Excel (*.xls)", "xls");
+//        fileChooser.setAcceptAllFileFilterUsed(false);
+//        fileChooser.setFileFilter(filter);
+//        fileChooser.setDialogTitle("GUARDAR ARCHIVO");
+//        if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+//
+//            try {
+//                File archivo = new File(fileChooser.getSelectedFile().getAbsolutePath());
+//
+//                OutputStream out = null;
+//                if (getFileExtension(archivo)) {
+//                    out = new FileOutputStream(fileChooser.getSelectedFile().getAbsolutePath());
+//                } else {
+//                    out = new FileOutputStream(fileChooser.getSelectedFile().getAbsolutePath() + ".xls");
+//                }
+//
+//                JOptionPane.showMessageDialog(this, "Archivo generado con éxito");
+//
+//                workbook.write(out);
+//                workbook.close();
+//                out.flush();
+//                out.close();
+//            } catch (IOException ex) {
+//                Logger.getLogger(pnlAndroid.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//
+//        }
+//    }
+//    //obtener la extension del archivo
+//    private boolean getFileExtension(File file) {
+//        String ext = null;
+//        String s = file.getName();
+//        int i = s.lastIndexOf('.');
+//
+//        if (i > 0 && i < s.length() - 1) {
+//            ext = s.substring(i + 1).toLowerCase();
+//        }
+//
+//        if (ext != null) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
 
     //metodo Buscar
     public void buscar(String codjaryvat) {
@@ -605,7 +672,7 @@ TextFieldEvent evento=new TextFieldEvent();
 
         jLabel3.setText("Estado Civil:");
 
-        jcestado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Soltero(a)", "Casado(a)", "viudo(a)", "Divorciado(a)", "Acompanado(a)" }));
+        jcestado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Soltero(a)", "Casado(a)", "viudo(a)", "Divorciado(a)", "Acompañado(a)" }));
 
         txtnombre.setToolTipText("Nombre");
         txtnombre.setPlaceholder("Nombre(s)");

@@ -10,10 +10,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
 
-/**
- *
- * @author DiegoArevalo
- */
 public class PlanillaDao extends daogeneral.DaoGeneral{
       //Establecer conexion con la base de datos
     SessionFactory factory = HibernateUtil.getSessionFactory();
@@ -60,6 +56,31 @@ public class PlanillaDao extends daogeneral.DaoGeneral{
             tx = session.beginTransaction();
            //query que permite encontrar los registros por medio de una busqueda
             Query query = session.createQuery("From Planillas where codigoplanilla like '%"+parameter+"%'");
+            listado =(List<Planillas>) query.list();
+            //permite ejecutar toda la consulta
+            tx.commit();
+
+        } catch (HibernateException e) {
+            if (tx != null) {
+                //permite volver al estado normal
+                tx.rollback();
+            }
+            System.out.println("Error: "+e.getMessage());
+        } finally {
+            session.close();
+        }
+        return listado;
+    }
+    public List<Planillas> findbyId(String parameter) {
+       //atributo que contendra los registros encontrados
+        List<Planillas> listado = null;
+        Transaction tx = null;
+        try {
+            //abrir la conexion
+            session = factory.openSession();
+            tx = session.beginTransaction();
+           //query que permite encontrar los registros por medio de una busqueda
+            Query query = session.createQuery("From Planillas where codigoplanilla='"+parameter+"'");
             listado =(List<Planillas>) query.list();
             //permite ejecutar toda la consulta
             tx.commit();

@@ -29,8 +29,8 @@
         <property name="pax" type="string">
             <column name="pax" length="50" not-null="true" />
         </property>
-        <property name="entrada" type="time">
-            <column name="entrada" length="8" not-null="true" />
+        <property name="entrada" type="string">
+            <column name="entrada" length="20" not-null="true" />
         </property>
         <property name="capitan" type="string">
             <column name="capitan" length="50" not-null="true" />

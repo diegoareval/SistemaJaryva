@@ -10,15 +10,18 @@ import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
 
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+
 import paneles.CambiaPanel;
 
 
 public class Principal extends javax.swing.JFrame {
-    SesionUsuarios sesionusu=new SesionUsuarios();
+   
     Usuarios usuario=null;
  
     int x, y;
@@ -39,11 +42,16 @@ public class Principal extends javax.swing.JFrame {
     }
     public void setUsuario(Usuarios usuarios) {
         usuario=usuarios;
-        lblusuario.setText(usuarios.getNivelAcceso());
-        
+        lblusuario.setText(usuarios.getCodigo().toString());
+        //lblid.setText(usuarios.getCodigo().toString());
+       
+   
+    
+    
         
        // setPrivilegios(usuario.getPrivilegios());
     }
+    
     
 //    public void popup(){
 //      JPopupMenu popup=new JPopupMenu();
@@ -1227,7 +1235,9 @@ banco.setVisible(true);
 
     private void jmafpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmafpActionPerformed
        frmAfp afp=new frmAfp();
-afp.setVisible(true);
+       
+       afp.UserFilter(lblusuario.getText().toString());
+       afp.setVisible(true);
     }//GEN-LAST:event_jmafpActionPerformed
 
     private void jmsalonesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmsalonesActionPerformed

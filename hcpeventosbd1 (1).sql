@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-10-2019 a las 22:10:48
+-- Tiempo de generación: 18-11-2019 a las 15:26:51
 -- Versión del servidor: 10.1.37-MariaDB
 -- Versión de PHP: 7.3.0
 
@@ -154,9 +154,11 @@ CREATE TABLE `cat_personal` (
 --
 
 INSERT INTO `cat_personal` (`cod_personal`, `cod_programacion`, `cod_cargo`, `cod_jaryva`, `cod_afp`, `cod_banco`, `nombres`, `apellidos`, `direccion`, `genero`, `estado_civil`, `telefono1`, `telefono2`, `cod_departamento`, `fecha_ingreso`, `fecha_nacimiento`, `dui`, `nit`, `isss`, `nup`, `cta_bancaria`, `cat_pago`, `obserbaciones`) VALUES
-(11, 2, 5, '2345', 2, 10, 'diego arevalo', 'arevalo', 'la reina1', 'Masculino', 'Soltero(a)', '7548393', '', 1, '2019-08-14', '1996-10-04', '594393939', '549339339', '5749849', '5849303', '8449393', 'A', 'hola'),
+(11, 2, 5, '2345', 2, 10, 'diego arevalo1 arevalo', 'arevalo', 'la reina1', 'Masculino', 'Soltero(a)', '7548393', '', 1, '2019-08-14', '1996-10-04', '594393939', '549339339', '5749849', '5849303', '8449393', 'A', 'hola'),
 (14, 2, 5, '5678', 2, 9, 'Diego Enrique', 'Arevalo', 'la reina', 'Masculino', 'Soltero(a)', '7654004', '', 1, '2019-08-18', '2019-08-23', '7493930', '8439303', '483930330', '48390303', '4830303', 'A', 'esta es la primera obserbacion encontrada debido a tal cosa'),
-(15, 4, 3, '2345', 3, 8, 'Cristian', 'menjivar', 'nueva concepcion', 'Masculino', 'Soltero(a)', '578439', '7438292', 2, '2019-09-10', '2019-09-17', '5739292', '47392920', '4739303', '4739302', '43839292', 'A', '');
+(15, 2, 5, '2345', 2, 10, 'diego arevalo', 'arevalo', 'la reina', 'Masculino', 'Soltero(a)', '7548393', '', 1, '2019-08-14', '1996-10-04', '594393939', '549339339', '5749849', '5849303', '8449393', 'A', 'hola'),
+(16, 1, 4, '3443', 2, 4, 'Diego', 'Arevalo', 'Chalatenango', 'Masculino', 'Soltero(a)', '57483939', '4839399', 1, '2019-11-08', '2019-11-14', '74399292', '839020202', '43930202', '4030303', '584303\'3030', 'A', 'de prueba'),
+(17, 1, 4, '46578', 3, 4, 'Alejandra', 'Lemuz', 'el jardin', 'Masculino', 'Soltero(a)', '443456', '', 1, '2019-11-10', '2019-11-08', '574392020-', '338384838', '4738922', '4738399', '43394783', 'A', 'hi');
 
 -- --------------------------------------------------------
 
@@ -183,7 +185,7 @@ CREATE TABLE `contrato_trabajo` (
 INSERT INTO `contrato_trabajo` (`idcontrato`, `cod_personal`, `fechacontrato`, `finalizacioncontrato`, `enfecha`, `extendido`, `nacionalidad`, `profesion`, `lugartrabajo`) VALUES
 (9, 11, '2019-08-21', '2019-08-21', '2019-08-21', 'djdj', 'Salvadoreña', 'Profesor', 'jjdd'),
 (10, 14, '2019-08-24', '2019-08-24', '2019-08-24', 'merliot', 'Salvadoreña', 'Profesor', 'crowne plaza'),
-(11, 15, '2019-09-09', '2019-09-11', '2019-09-13', 'san salvador', 'Salvadoreña', 'Ing Civil Industrial', 'crowne plaza');
+(11, 15, '2019-09-11', '2019-09-11', '2019-09-11', 'periplaza', 'Salvadoreña', 'Ing Civil Industrial', 'lugar');
 
 -- --------------------------------------------------------
 
@@ -202,7 +204,8 @@ CREATE TABLE `departamentos` (
 
 INSERT INTO `departamentos` (`cod_departamento`, `descripcion`) VALUES
 (1, 'ventas1'),
-(2, 'nuevo registro');
+(2, 'nuevo registro1'),
+(3, 'otro cargo');
 
 -- --------------------------------------------------------
 
@@ -215,6 +218,40 @@ CREATE TABLE `detalle_act_programaciones` (
   `idprogramaciones` int(11) NOT NULL,
   `idevento` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `detalle_act_programaciones`
+--
+
+INSERT INTO `detalle_act_programaciones` (`iddetalleact`, `idprogramaciones`, `idevento`) VALUES
+(1, 5, 6),
+(2, 6, 6),
+(3, 6, 7),
+(4, 7, 6),
+(5, 7, 6),
+(6, 7, 6),
+(7, 7, 6),
+(8, 7, 6),
+(9, 7, 6),
+(10, 7, 6),
+(11, 8, 6),
+(12, 8, 6),
+(13, 8, 6),
+(14, 8, 6),
+(15, 8, 6),
+(16, 8, 6),
+(17, 8, 6),
+(18, 9, 6),
+(19, 9, 7),
+(20, 9, 6),
+(21, 9, 6),
+(22, 9, 7),
+(23, 9, 7),
+(24, 10, 7),
+(25, 10, 6),
+(26, 10, 6),
+(27, 10, 7),
+(28, 10, 7);
 
 -- --------------------------------------------------------
 
@@ -253,7 +290,8 @@ CREATE TABLE `detalle_movimiento_programacion` (
 --
 
 INSERT INTO `detalle_movimiento_programacion` (`id`, `idpersonal`, `fecha`, `idactividad`, `horas`, `precio`, `valor`, `idmovimiento`) VALUES
-(2, 15, '2019-10-08', 7, 12, '1.00', '12.00', 1);
+(2, 15, '2019-10-08', 7, 12, '1.00', '12.00', 1),
+(3, 11, '2019-11-08', 4, 12, '100.00', '1200.00', 2);
 
 -- --------------------------------------------------------
 
@@ -342,7 +380,7 @@ CREATE TABLE `grupofamiliar` (
 --
 
 INSERT INTO `grupofamiliar` (`idgrupo`, `cod_contrato`, `grupofamiliar`, `parentezco`) VALUES
-(1, 11, '', 'padres e hijos');
+(1, 11, 'prueba', 'padres e hijos');
 
 -- --------------------------------------------------------
 
@@ -371,6 +409,8 @@ CREATE TABLE `movimientoprogramacion` (
 --
 
 INSERT INTO `movimientoprogramacion` (`id`, `idplanilla`) VALUES
+(3, '12'),
+(2, '34'),
 (1, '45');
 
 -- --------------------------------------------------------
@@ -397,7 +437,8 @@ INSERT INTO `obligaciones_contrato` (`idobligaciones`, `idcontrato`, `obligacion
 (7, 10, 'esta es una prueba1'),
 (8, 10, 'otra obligacion'),
 (9, 11, 'primer obligacion formal'),
-(10, 11, 'es un crio');
+(10, 11, 'es un crio'),
+(11, 11, 'otra obligacion');
 
 -- --------------------------------------------------------
 
@@ -440,7 +481,8 @@ CREATE TABLE `programacion` (
 INSERT INTO `programacion` (`cod_programacion`, `descripcion`) VALUES
 (1, 'Restaurante1'),
 (2, 'proceso'),
-(4, 'proceso nuevo');
+(4, 'proceso nuevo'),
+(5, 'otro');
 
 -- --------------------------------------------------------
 
@@ -455,11 +497,27 @@ CREATE TABLE `programaciones` (
   `fecha` date NOT NULL,
   `descripcion` varchar(100) NOT NULL,
   `pax` varchar(50) NOT NULL,
-  `entrada` time NOT NULL,
+  `entrada` varchar(20) NOT NULL,
   `capitan` varchar(50) NOT NULL,
   `idsalon` int(11) NOT NULL,
   `idmovimientoprogramaciones` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `programaciones`
+--
+
+INSERT INTO `programaciones` (`idprogramaciones`, `idplanilla`, `idprogramacion`, `fecha`, `descripcion`, `pax`, `entrada`, `capitan`, `idsalon`, `idmovimientoprogramaciones`) VALUES
+(1, '34', 1, '2019-11-14', 'hola', 'aaaaa', '6.00 am', 'diego arevalo', 1, 1),
+(2, '45', 2, '2019-11-14', 'hola', '12gjf', '6.00', 'Melvin ', 1, 1),
+(3, '34', 1, '2019-11-14', 'fj', 'dhd', '5', 'hola', 1, 2),
+(4, '34', 2, '2019-11-21', 'ho', 'fjfj', '57', 'hola', 1, 1),
+(5, '12', 1, '2019-11-15', 'hola', 'djd', 'ddh', 'hola', 1, 1),
+(6, '34', 1, '2019-11-13', 'hola', '12', '6', 'hola', 1, 1),
+(7, '34', 1, '2019-11-14', 'hello', '12', '6', 'saul', 1, 1),
+(8, '34', 1, '2019-11-14', 'hello', '12', '6', 'saul', 1, 1),
+(9, '12', 1, '2019-11-02', 'esta es una descripcion', '3443', '6:00 Am', 'Melvin ', 1, 1),
+(10, '12', 1, '2019-11-02', 'esta es una descripcion', '3443', '6:00 Am', 'Melvin ', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -520,7 +578,8 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`codigo`, `nombre`, `usuario`, `nivel_acceso`, `clave`) VALUES
 (2, 'diego enrique arevalo', 'Diego1', 'Consulta', '1234'),
-(3, 'Melvin Marin', 'Melvin', 'Total', '1234');
+(3, 'Melvin Marin', 'Melvin', 'Total', '1234'),
+(4, 'testing', 'jaryva', 'Consulta', '1234');
 
 --
 -- Índices para tablas volcadas
@@ -728,7 +787,7 @@ ALTER TABLE `cargos`
 -- AUTO_INCREMENT de la tabla `cat_personal`
 --
 ALTER TABLE `cat_personal`
-  MODIFY `cod_personal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `cod_personal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `contrato_trabajo`
@@ -740,13 +799,13 @@ ALTER TABLE `contrato_trabajo`
 -- AUTO_INCREMENT de la tabla `departamentos`
 --
 ALTER TABLE `departamentos`
-  MODIFY `cod_departamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `cod_departamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_act_programaciones`
 --
 ALTER TABLE `detalle_act_programaciones`
-  MODIFY `iddetalleact` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `iddetalleact` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_hojapago`
@@ -758,7 +817,7 @@ ALTER TABLE `detalle_hojapago`
 -- AUTO_INCREMENT de la tabla `detalle_movimiento_programacion`
 --
 ALTER TABLE `detalle_movimiento_programacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `devengos_contrato`
@@ -794,25 +853,25 @@ ALTER TABLE `hojapago`
 -- AUTO_INCREMENT de la tabla `movimientoprogramacion`
 --
 ALTER TABLE `movimientoprogramacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `obligaciones_contrato`
 --
 ALTER TABLE `obligaciones_contrato`
-  MODIFY `idobligaciones` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idobligaciones` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `programacion`
 --
 ALTER TABLE `programacion`
-  MODIFY `cod_programacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `cod_programacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `programaciones`
 --
 ALTER TABLE `programaciones`
-  MODIFY `idprogramaciones` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idprogramaciones` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `salones`
@@ -830,7 +889,7 @@ ALTER TABLE `tipo_planilla`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas

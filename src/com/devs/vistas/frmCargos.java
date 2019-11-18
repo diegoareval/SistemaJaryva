@@ -3,7 +3,7 @@ package com.devs.vistas;
 
 
 import com.devs.auxiliar.Conexion;
-import com.devs.auxiliar.ConexionBD;
+
 import dao.CargoDao;
 import ds.desktop.notify.DesktopNotify;
 import entities.Cargos;
@@ -53,8 +53,8 @@ import rojerusan.RSNotifyFade;
 
 public class frmCargos extends javax.swing.JFrame {
     // Excel work book
-     public static ConexionBD cl = new ConexionBD();
-    public static Connection cn = cl.conexion();
+    // public static ConexionBD cl = new ConexionBD();
+   // public static Connection cn = cl.conexion();
     public static PreparedStatement ps;
     
     
@@ -137,7 +137,7 @@ public class frmCargos extends javax.swing.JFrame {
       item3.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent e) {
-              generateExcel();
+            //  generateExcel();
           }
       });
       item4.addActionListener(new ActionListener() {
@@ -344,239 +344,7 @@ private void limpiarTabla() {
             e.printStackTrace();
         }
     }
-    //<editor-fold defaultstate="collapsed" desc="test">
-    public HSSFWorkbook generateExcel() {
-		
-		// Initialize rowIndex
-		rowIndex = 0;
-		
-		// New Workbook
-		workbook = new HSSFWorkbook();
-		
-		// Generate fonts
-		headerFont  = createFont(HSSFColor.WHITE.index, (short)14, true);
-		contentFont = createFont(HSSFColor.BLACK.index, (short)10, true);
-		
-		// Generate styles
-		headerStyle  = createStyle(headerFont,  HSSFCellStyle.ALIGN_CENTER, HSSFColor.BLUE.index, true, HSSFColor.WHITE.index);
-		oddRowStyle  = createStyle(contentFont, HSSFCellStyle.ALIGN_LEFT,   HSSFColor.GREY_25_PERCENT.index, true, HSSFColor.GREY_80_PERCENT.index);
-		evenRowStyle = createStyle(contentFont, HSSFCellStyle.ALIGN_LEFT,   HSSFColor.GREY_40_PERCENT.index, true, HSSFColor.GREY_80_PERCENT.index);
-		
-		// New sheet
-		HSSFSheet sheet = workbook.createSheet("Cargos");
-		
-		// Table header
-		HSSFRow      headerRow    = sheet.createRow( rowIndex++ );
-		List<String> headerValues = getTableHeaders();
-		
-		HSSFCell headerCell = null;
-		for (int i = 0; i < headerValues.size(); i++) {
-			headerCell = headerRow.createCell(i);
-			headerCell.setCellStyle(headerStyle);
-			headerCell.setCellValue( headerValues.get(i) );
-		}
-		
-		
-		// Table content
-		HSSFRow  contentRow  = null;
-		HSSFCell contentCell = null;
-		
-		// Obtain table content values
-		List<List<String>> contentRowValues =getTableContent(20);
-		for (List<String> rowValues : contentRowValues) {
-			
-			// At each row creation, rowIndex must grow one unit
-			contentRow = sheet.createRow( rowIndex++ );
-			for (int i = 0; i < rowValues.size(); i++) {
-				contentCell = contentRow.createCell(i);
-				contentCell.setCellValue( rowValues.get(i) );
-				
-				// Style depends on if row is odd or even
-				contentCell.setCellStyle( rowIndex % 2 == 0 ? oddRowStyle : evenRowStyle );
-			}
-		}
-		
-		
-		// Autosize columns
-		for (int i = 0; i < headerValues.size(); sheet.autoSizeColumn(i++));
-		
-		return workbook;
-	}
-	
-	
-	/**
-	 * Create a new font on base workbook
-	 * 
-	 * @param fontColor       Font color (see {@link HSSFColor})
-	 * @param fontHeight      Font height in points
-	 * @param fontBold        Font is boldweight (<code>true</code>) or not (<code>false</code>)
-	 * 
-	 * @return New cell style
-	 */
-	private HSSFFont createFont(short fontColor, short fontHeight, boolean fontBold) {
-		
-		HSSFFont font = workbook.createFont();
-		font.setBold(fontBold);
-		font.setColor(fontColor);
-		font.setFontName("Arial");
-		font.setFontHeightInPoints(fontHeight);
-		
-		return font;
-	}
-	
-	
-	/**
-	 * Create a style on base workbook
-	 * 
-	 * @param font            Font used by the style
-	 * @param cellAlign       Cell alignment for contained text (see {@link HSSFCellStyle})
-	 * @param cellColor       Cell background color (see {@link HSSFColor})
-	 * @param cellBorder      Cell has border (<code>true</code>) or not (<code>false</code>)
-	 * @param cellBorderColor Cell border color (see {@link HSSFColor})
-	 * 
-	 * @return New cell style
-	 */
-	private HSSFCellStyle createStyle(HSSFFont font, short cellAlign, short cellColor, boolean cellBorder, short cellBorderColor) {
-
-		HSSFCellStyle style = workbook.createCellStyle();
-		style.setFont(font);
-		style.setAlignment(cellAlign);
-		style.setFillForegroundColor(cellColor);
-		style.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
-		
-		if (cellBorder) {
-			style.setBorderTop(HSSFCellStyle.BORDER_THIN);
-			style.setBorderLeft(HSSFCellStyle.BORDER_THIN);
-			style.setBorderRight(HSSFCellStyle.BORDER_THIN);
-			style.setBorderBottom(HSSFCellStyle.BORDER_THIN);
-			
-			style.setTopBorderColor(cellBorderColor);
-			style.setLeftBorderColor(cellBorderColor);
-			style.setRightBorderColor(cellBorderColor);
-			style.setBottomBorderColor(cellBorderColor);
-		}
-		
-		return style;
-	}
-        
-        public static List<String> getTableHeaders() {
-        List<String> tableHeader = new ArrayList<String>();
-        //TITULOS DE LAS COLUMNAS
-        tableHeader.add("ID");
-        tableHeader.add("Descripcion");
-       
-
-        return tableHeader;
-    }
-        
-//        public static List<List<String>> getTableContent(int numberOfRows) {
-//        try {
-//            if (numberOfRows <= 0) {
-//                throw new IllegalArgumentException("The number of rows must be a positive integer");
-//            }
-//CargoDao carg=new CargoDao();
-//            List<List<String>> tableContent = new ArrayList<List<String>>();
-//           List<Cargos> lista=carg.listAll();
-//            List<String> row = null;
-//          // int cantidadLista = lista.size();//cantidad de la lista
-//       for (int i = 0; i < lista.size(); i++) {
-//           Cargos p = lista.get(i);
-//            row.add(p.getCodCargo().toString());
-//                row.add(p.getDescripcion());
-//                tableContent.add(row = new ArrayList<String>());
-//           //tableContent.add(lista = new ArrayList<Cargos>());
-//          
-//       }
-//           
-//            
-//            return tableContent;
-//        } catch (Exception ex) {
-//            System.out.println("error "+ex.getMessage());
-//        }
-//
-//        return null;
-//    }
-         private void generarExcel() {
-        HSSFWorkbook workbook = generateExcel();
-        JFileChooser fileChooser = new JFileChooser();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos Excel (*.xls)", "xls");
-        fileChooser.setAcceptAllFileFilterUsed(false);
-        fileChooser.setFileFilter(filter);
-        fileChooser.setDialogTitle("GUARDAR ARCHIVO");
-        if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
-
-            try {
-                File archivo = new File(fileChooser.getSelectedFile().getAbsolutePath());
-
-                OutputStream out = null;
-                if (getFileExtension(archivo)) {
-                    out = new FileOutputStream(fileChooser.getSelectedFile().getAbsolutePath());
-                } else {
-                    out = new FileOutputStream(fileChooser.getSelectedFile().getAbsolutePath() + ".xls");
-                }
-
-                JOptionPane.showMessageDialog(this, "Archivo generado con éxito");
-
-                workbook.write(out);
-                workbook.close();
-                out.flush();
-                out.close();
-            } catch (IOException ex) {
-                System.out.println("error"+ex.getMessage());
-            }
-
-        }
-        
-    }
-           private boolean getFileExtension(File file) {
-        String ext = null;
-        String s = file.getName();
-        int i = s.lastIndexOf('.');
-
-        if (i > 0 && i < s.length() - 1) {
-            ext = s.substring(i + 1).toLowerCase();
-        }
-
-        if (ext != null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-           public static List<List<String>> getTableContent(int numberOfRows) {
-        try {
-            if (numberOfRows <= 0) {
-                throw new IllegalArgumentException("The number of rows must be a positive integer");
-            }
-
-            List<List<String>> tableContent = new ArrayList<List<String>>();
-
-            String SQL = "SELECT * FROM cargos";
-            Statement st = cn.createStatement();
-            ResultSet rs = st.executeQuery(SQL);
-
-            int i = 0;
-            List<String> row = null;
-            while (rs.next()) {
-                tableContent.add(row = new ArrayList<String>());
-
-                row.add(rs.getString("cod_cargo"));
-                row.add(rs.getString("descripcion"));
-               
-
-                i++;
-            }
-            return tableContent;
-        } catch (SQLException ex) {
-            System.out.println("error"+ex.getMessage());
-        }
-
-        return null;
-    }
-
-
-
-        // </editor-fold> 
+  
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -810,8 +578,7 @@ private void limpiarTabla() {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnreporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnreporteActionPerformed
-      // imprimireporte();
-       generarExcel();
+       imprimireporte();
     }//GEN-LAST:event_btnreporteActionPerformed
 
     /**

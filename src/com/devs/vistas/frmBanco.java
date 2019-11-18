@@ -3,8 +3,7 @@ package com.devs.vistas;
 
 
 import com.devs.auxiliar.Conexion;
-import static com.devs.vistas.frmCargos.getTableContent;
-import static com.devs.vistas.frmCargos.getTableHeaders;
+
 import dao.BancoDao;
 import ds.desktop.notify.DesktopNotify;
 import entities.Bancos;
@@ -45,20 +44,7 @@ public class frmBanco extends javax.swing.JFrame {
 BancoDao bcDao = new BancoDao();
 
 
-private HSSFWorkbook workbook;
-	
-	// Fonts
-	private HSSFFont headerFont;
-	private HSSFFont contentFont;
-	
-	// Styles
-	private HSSFCellStyle headerStyle;
-	private HSSFCellStyle oddRowStyle;
-	private HSSFCellStyle evenRowStyle;
-	
-	// Integer to store the index of the next row
-	private int rowIndex;
-    
+
     
 
 
@@ -507,7 +493,7 @@ public void guardar(){
     
     
     private void btnimprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnimprimirActionPerformed
-       // imprimireporte();
+        imprimireporte();
        
     }//GEN-LAST:event_btnimprimirActionPerformed
 

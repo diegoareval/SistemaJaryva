@@ -111,4 +111,30 @@ public class UsuarioDao extends DaoGeneral{
         }
         return usuario;
     }
+     
+      public List<Usuarios> findbyId(String parameter) {
+       //atributo que contendra los registros encontrados
+        List<Usuarios> listado = null;
+        Transaction tx = null;
+        try {
+            //abrir la conexion
+            session = factory.openSession();
+            tx = session.beginTransaction();
+           //query que permite encontrar los registros por medio de una busqueda
+            Query query = session.createQuery("From Usuarios where codigo='"+parameter+"'");
+            listado =(List<Usuarios>) query.list();
+            //permite ejecutar toda la consulta
+            tx.commit();
+
+        } catch (HibernateException e) {
+            if (tx != null) {
+                //permite volver al estado normal
+                tx.rollback();
+            }
+            System.out.println("Error: "+e.getMessage());
+        } finally {
+            session.close();
+        }
+        return listado;
+    }
 }

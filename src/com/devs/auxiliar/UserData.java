@@ -1,31 +1,25 @@
 
 package com.devs.auxiliar;
 
+import entities.Usuarios;
+
 public class UserData {
-    String Username;
-    int id;
-    
-    public UserData(String Username, int id)
-    {
-        this.Username = Username;
-        this.id  = id;
+    Usuarios usuarios;
+  
+   
+    public void UserData(){
+        
     }
 
-    public String getUsername() {
-        return Username;
+    public Usuarios getUsername() {
+        return usuarios;
     }
 
-    public void setUsername(String Username) {
-        this.Username = Username;
+    public void setUsername(Usuarios usuarios) {
+        this.usuarios = usuarios;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+   
     
     
 }
